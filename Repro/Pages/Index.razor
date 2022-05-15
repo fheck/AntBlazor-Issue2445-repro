@@ -1,0 +1,79 @@
+﻿@page "/"
+@using Repro.Data
+
+<Row>
+    <Col Flex=@("auto")>
+        <Form Model="@model"
+              LabelColSpan="8"
+              WrapperColSpan="12">
+            <FormItem Label="Test">
+                <Cascader Options="@options" @bind-Value="context.Value" ExpandTrigger="hover" ShowSearch></Cascader>
+            </FormItem>
+        </Form>
+    </Col>
+</Row>
+
+@code{
+
+    private List<CascaderNode> options;
+    private Dto model = new();
+
+    protected override void OnInitialized()
+    {
+        options = new List<CascaderNode>
+        {
+            new()
+            {
+                Label = "1. Layer 1",
+                Value = "",
+                Children = new List<CascaderNode>
+                {
+                    new()
+                    {
+                        Label = "1. Layer 2",
+                        Value = "",
+                        Children = new List<CascaderNode>
+                        {
+                            new()
+                            {
+                                Value = "1",
+                                Label = "Test 1",
+                            },
+                            new()
+                            {
+                                Value = "2",
+                                Label = "Test 2",
+                            },
+                        },
+                    },
+                },
+            },
+            new()
+            {
+                Label = "2. Layer 1",
+                Value = "",
+                Children = new List<CascaderNode>
+                {
+                    new()
+                    {
+                        Label = "2. Layer 2",
+                        Value = "",
+                        Children = new List<CascaderNode>()
+                        {
+                            new()
+                            {
+                                Value = "3",
+                                Label = "Test 3",
+                            },
+                            new()
+                            {
+                                Value = "4",
+                                Label = "Test 4",
+                            },
+                        },
+                    },
+                },
+            },
+        };
+    }
+}
